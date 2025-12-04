@@ -635,7 +635,7 @@ class MiniMapWidget(FigureCanvas):
         super().__init__(fig)
         self.setParent(parent)
         # 设置更大的最小尺寸，让地图在聊天区域中更宽
-        self.setMinimumSize(700, 340)
+        self.setMinimumSize(600, 340)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
         self.ax = fig.add_subplot(111)
@@ -826,7 +826,7 @@ class MainWindow(QWidget):
         super().__init__()
         self.setWindowTitle("MELT-Rec")
         self.setWindowIcon(QIcon("icon.png"))  # 请准备一个图标文件
-        self.resize(1400, 900)  # 增大窗口尺寸以便更好地显示推荐结果
+        self.resize(900, 900)  # 增大窗口尺寸以便更好地显示推荐结果
 
                # 初始化数据
         self.csv_data = None
@@ -1002,6 +1002,17 @@ class MainWindow(QWidget):
         title_label = QLabel("MELT-Rec: A Meta-Learning-Based System for Tourism Recommendation")
         title_label.setAlignment(Qt.AlignCenter)
 
+        title_label.setStyleSheet("""
+            QLabel {
+                font-family: 'Segoe UI';
+                font-size: 20px;
+                font-weight: 600;
+                color: #1E3A8A;          /* 深蓝 */
+                letter-spacing: 1px;     /* 微字间距 */
+                padding: 7px 0;
+            }
+        """)
+
         # 消息列表区域（滚动容器）
         from PyQt5.QtWidgets import QScrollArea
 
@@ -1119,7 +1130,7 @@ class MainWindow(QWidget):
                 "background-color: #2563EB; color: white; border-radius: 16px; font: bold 14px 'Segoe UI';"
             )
             # 为用户行设置右侧 margin≈230px，让整行相对 AlignRight 位置再向右平移约 10px
-            outer_layout.setContentsMargins(0, 0, 230, 0)
+            outer_layout.setContentsMargins(0, 0, 0, 0)
             # 左侧留空，右侧依次是绿色气泡和头像（恢复上一版布局）
             inner_layout.addStretch()
             inner_layout.addWidget(bubble)
@@ -1133,7 +1144,7 @@ class MainWindow(QWidget):
             bubble.setMinimumWidth(600)
             bubble.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
             # 为系统行减少左侧内边距，让头像和白色气泡整体略微向右偏移（左边距从 12 降到 0）
-            inner_layout.setContentsMargins(0, 0, 152, 0)
+            inner_layout.setContentsMargins(0, 15, 152, 0)
             avatar.setText("M")
             avatar.setStyleSheet(
                 "background-color: #10B981; color: white; border-radius: 16px; font: bold 14px 'Segoe UI';"
@@ -1340,7 +1351,7 @@ class MainWindow(QWidget):
 
         text_label = QLabel(f"Running meta-learning pre-training for {city_name}, please wait…")
         text_label.setStyleSheet("color: #4B5563; font: 14px 'Segoe UI';")
-        text_label.setWordWrap(True)
+        text_label.setWordWrap(False)
 
         inner_layout.addWidget(dot_label)
         inner_layout.addWidget(text_label)
